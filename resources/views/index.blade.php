@@ -1,4 +1,3 @@
-<div>
-    <!-- Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less. - Maria Skłodowska-Curie -->
-     <h1>Your in Job/Index</h1>
-</div>
+<x-layout title="{{$pageTitle}}">
+    <h1>Welcome To Index Page</h1>
+</x-layout>
