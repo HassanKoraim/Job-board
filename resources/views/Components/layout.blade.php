@@ -7,7 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#2d3748] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
            <h1>Welcome to Job Board</h1>
            <nav>
                 <a href="/">Home</a>
