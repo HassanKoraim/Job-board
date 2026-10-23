@@ -13,13 +13,10 @@ Route::get('/about', [IndexController::class,'about']);
 Route::get('/contact', [IndexController::class,'contact']);
 
 Route::get( '/blog', [PostController::class,'index']);
-Route::get( '/blog/create', [PostController::class,'create']);
-Route::get( '/blog/delete/{id}', [PostController::class,'delete']);
+
 Route::get('/blog/show/{id}', [PostController::class,'show']);
 
-Route::get('comment/create', [CommentController::class,'create']);
 Route::get('comment/index', [CommentController::class,'index']);
 
 Route::get( '/tags', [TagController::class,'index']);
-Route::get( '/tags/create', [TagController::class,'create']);
-Route::get( '/tags/testManyToMany', [TagController::class,'testManyToMany']);
+Route::get( '/tags/testManyToMany', [TagController::class,'testManyToMany']); 

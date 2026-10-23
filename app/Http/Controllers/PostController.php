@@ -11,8 +11,9 @@ class PostController extends Controller
        return View("post.index",['posts'=>$posts, 'pageTitle'=>'Blog Page']);
     }
     public function create(){
-      Post::factory(100)->create();
-        return redirect('/blog');
+      Post::factory(10)->create();
+       // return redirect('/blog');
+       return response("Successfull Creation", 201);
     }
     function show($id){
         $post = Post::findOrFail($id);
@@ -21,6 +22,7 @@ class PostController extends Controller
     }
     function delete($id){
         Post::destroy($id);
-        return redirect('/blog');
+       // return redirect('/blog');
+       return response("Successfull Deleted", 204);
     }
 }

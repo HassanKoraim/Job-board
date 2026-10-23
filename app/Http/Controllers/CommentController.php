@@ -17,7 +17,7 @@ class CommentController extends Controller
         // 'post_id'=> 1,
         // ]);
         Comment::factory(10)->create();
-        return redirect('/comment/index');
+        return response("Successfull Created", 201);
     }
    
 }

@@ -15,7 +15,7 @@ class TagController extends Controller
         Tag::create([
         'title' => 'Software'
         ] );
-        return redirect('/tags');
+        return response("Successfull Created",201);
     }
 
     function testManyToMany(){
