@@ -1,24 +1,65 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Comment;
 use Illuminate\Http\Request;
+
 class CommentController extends Controller
 {
-    function index(){
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
        $comments = Comment::paginate(5);
        return View("comment.index",['comments'=>$comments, 'pageTitle'=>'Blog Page']);
     }
-    function create(){
-        // comment::create([
-        // 'author' => 'Hassan Koraim',
-        // 'content'=> 'this is a second test comment for the first post',
-        // 'post_id'=> 1,
-        // ]);
-        Comment::factory(10)->create();
-        return response("Successfull Created", 201);
-    }
-   
-}
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('comment.create', ['pageTitle' => 'Create Comment']);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}

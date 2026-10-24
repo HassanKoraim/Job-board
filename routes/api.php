@@ -1,12 +1,10 @@
 <?php
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\TagController;
 
-Route::post('comment/create', [CommentController::class,'create']);
+use App\Http\Controllers\api\v1\PostApiController;
 
-Route::post( '/blog/create', [PostController::class,'create']);
-Route::delete( '/blog/delete/{id}', [PostController::class,'delete']);
-
-Route::post( '/tags/create', [TagController::class,'create']);
+Route::prefix('v1')->group(function () {
+    Route::apiResource('post', PostApiController::class);
+});
+Route::prefix('v2')->group(function () {
+    Route::apiResource('post', PostApiController::class);
+});
