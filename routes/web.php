@@ -15,7 +15,7 @@ Route::get('/', IndexController::class);
 Route::get('/about', AboutController::class);
 Route::get('/contact', ContactController::class);
 
-Route::resource('/blog', PostController::class);
+Route::resource('/blogs', PostController::class);
 // Route::get( '/blog', [PostController::class,'index']);
 // Route::get('/blog/show/{id}', [PostController::class,'show']);
 

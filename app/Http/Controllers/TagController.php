@@ -13,8 +13,14 @@ class TagController extends Controller
      */
     public function index()
     {
-    $tags = Tag::all();
-       return View("tag.index",['tags'=>$tags, 'pageTitle'=>'tag Page']);
+    // @TODO: REVIEW The Comment code.
+    // $tags = Tag::all();
+    // $tags = Tag::all();
+    // return view('post.create', [
+    //     'pageTitle' => 'Create Post',
+    //     'tags' => $tags
+    // ]);
+    //    return View("tag.index",['tags'=>$tags, 'pageTitle'=>'tag Page']);
     }
 
     /**
@@ -22,7 +28,8 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        Tag::factory(10)->create();
+        return response("Tags created successfully.",201);
     }
 
     /**
