@@ -7,44 +7,28 @@
             @method('PUT')
             <input type="hidden" name="id" value="{{ $post->id }}">
 
-            <!-- Title & Author Row -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                    <input type="text" 
-                           name="title" 
-                           value="{{ old('title', $post->title) }}" 
-                           id="inputtitle" 
-                           class="{{ $errors->has('title') ? 'outline outline-2 outline-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
-                           placeholder="Title">
-                    @error('title')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>              
-                
-                <div>
-                    <label for="author" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
-                    <input type="text" 
-                           name="author"
-                           value="{{ old('author', $post->author) }}"
-                           id="inputAuthor4" 
-                           class="{{ $errors->has('author') ? 'outline outline-2 outline-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
-                           placeholder="Author">
-                    @error('author')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+            <!-- Title -->
+            <div>
+                <label for="inputtitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                <input type="text" 
+                       name="title" 
+                       value="{{ old('title', $post->title) }}" 
+                       id="inputtitle" 
+                       class="{{ $errors->has('title') ? 'outline outline-2 outline-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                       placeholder="Title">
+                @error('title')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <!-- Body / Content -->
             <div>
-                <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
-                <input type="text" 
-                       name="body" 
-                       value="{{ old('body', $post->body) }}" 
-                       id="inputContent"
-                       class="{{ $errors->has('body') ? 'outline outline-2 outline-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
-                       placeholder="Write your content here...">
+                <label for="inputContent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                <textarea name="body" 
+                          id="inputContent" 
+                          rows="4"
+                          class="{{ $errors->has('body') ? 'outline outline-2 outline-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                          placeholder="Write your content here...">{{ old('body', $post->body) }}</textarea>
                 @error('body')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror

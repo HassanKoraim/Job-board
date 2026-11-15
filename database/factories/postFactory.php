@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Str;
 
@@ -23,8 +24,8 @@ class postFactory extends Factory
             'id' => Str::uuid()->tostring(),
             'title' => $this->faker->sentence(),
             'body' => $this->faker->paragraphs(3,asText: true),
-            'author' => $this->faker->name(),      
-            'published'=> $this->faker->boolean()
+            'published'=> $this->faker->boolean(),
+            'user_id'   => User::factory(),
              ];
     }
 }

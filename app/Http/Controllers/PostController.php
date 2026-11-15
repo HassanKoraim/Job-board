@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogPostRequest;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -29,7 +30,6 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-
         return View('Post.create', ['pageTitle' => 'Create Page', 'tags' => $tags]);
     }
 
@@ -58,7 +58,7 @@ class PostController extends Controller
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        $post->author = $request->input('author');
+        $post->user_id = $request->input('user_id');
         $post->published = $request->has('published') ? true : false;
         $post->save();
         if ($request->has('tags')) {
@@ -72,11 +72,11 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
         // @TODO: REVIEW This code to ensure it retrieves the post along with its associated tags and comments
         // And When edit show blade
-        $post = Post::with(['comments', 'tags'])->findOrFail($id);
+    //    $post = Post::with(['comments', 'tags'])->findOrFail($id);
         $tags = $post->tags;
 
         return View('post.show', ['post' => $post, 'pageTitle' => 'Show Page', 'tags' => $tags]);
@@ -85,13 +85,13 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-
-        // @TODO: REVIEW The Comment code and make the Tag section in the edit blade to show
-        //  the selected tags for the post and allow the user to select/deselect tags for the post
-
-        $post = Post::with('tags')->findOrFail($id);
+        // $post = Post::with('tags')->findOrFail($id);
+        // if(auth()->user()->id !== $post->user_id){
+        //     return redirect('blogs')->with('fail', 'You are not authorized to edit this post.');
+        // }
+     //   Gate::authorize('update', $post);
         $tags = Tag::all();
 
         return view('post.edit', [
@@ -104,12 +104,15 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(BlogPostRequest $request, string $id)
+    public function update(BlogPostRequest $request, Post $post)
     {
-        $post = Post::findOrFail($id);
+        // $post = Post::findOrFail($id);
+        //  if(auth()->user()->id !== $post->user_id){
+        //     return redirect('blogs')->with('fail', 'You are not authorized to edit this post.');
+        // }
+        //Gate::authorize('update', $post);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        $post->author = $request->input('author');
         $post->published = $request->has('published') ? true : false;
         $post->save();
         $post->tags()->sync($request->input('tags', []));
@@ -135,9 +138,9 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
+       // $post = Post::findOrFail($id);
         $post->delete();
 
         return redirect('blogs')->with('success', 'Post deleted successfully.');

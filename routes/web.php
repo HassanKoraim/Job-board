@@ -8,6 +8,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 // ## Public Routes
@@ -28,7 +29,26 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ## Protected Routes
 Route::middleware('auth')->group(function () {
-    Route::resource('/blogs', PostController::class);
+    //Route::resource('/blogs', PostController::class);
+
+        // Admin
+    Route::middleware('role:admin')->group(function () {
+        Route::delete('/blogs/{post}', [PostController::class, 'destroy'])->can('delete', 'post');
+    });
+        // Editor,Admin
+    Route::middleware('role:editor,admin')->group(function () {
+        Route::get('/blogs/{post}/edit', [PostController::class, 'edit'])->can('update', 'post');
+        Route::put('/blogs/{post}', [PostController::class, 'update'])->can('update', 'post');
+        Route::get('/blogs/create', [PostController::class, 'create'])->can('create', Post::class);
+        Route::post('/blogs', [PostController::class, 'store'])->can('create', Post::class);
+    });
+
+    // Viewer, Editor, Admin
+    Route::middleware('role:viewer,editor,admin')->group(function () {
+        Route::get('/blogs', [PostController::class, 'index']);
+        Route::get('/blogs/{post}', [PostController::class, 'show']);
+    });
+
     Route::resource('comments', CommentController::class);
 });
 

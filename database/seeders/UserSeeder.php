@@ -13,10 +13,26 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Admin user
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password'=> Hash::make('123'),
+            'email' => 'admin@boss.com',
+            'role' => 'admin',
+            'password'=> Hash::make('12345678'),
+        ]);
+        // Editor user
+         User::create([
+            'name' => 'editor',
+            'email' => 'editor@boss.com',
+            'role' => 'editor',
+            'password'=> Hash::make('12345678'),
+        ]);
+        // Viewer user
+         User::create([
+            'name' => 'viewer',
+            'email' => 'viewer@boss.com',
+            'role' => 'viewer',
+            'password'=> Hash::make('12345678'),
         ]);
     }
 }
